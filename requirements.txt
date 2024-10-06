@@ -1,0 +1,3 @@
+pgmpy
+requests
+stix2
