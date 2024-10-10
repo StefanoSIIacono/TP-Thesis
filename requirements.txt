@@ -1,3 +1,4 @@
+os
 pgmpy
 requests
 stix2
