@@ -1,6 +1,6 @@
 pgmpy
 requests
 networkx
-arango
+python-arango
 pandas
 numpy

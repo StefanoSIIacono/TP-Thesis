@@ -12,8 +12,11 @@ class AttackGraph:
         """Load data from MulVAL output files"""
         self.vertices = pd.read_csv(vertices_path, header=None, 
                                   names=['ID', 'Label', 'Type', 'InitialValue'])
+        
+        # Parent and child are inverted because of the representation of the graph 
+        # It is no more Parent -> Child but Precondition -> Postcondition
         self.arcs = pd.read_csv(arcs_path, header=None, 
-                              names=['Parent', 'Child', 'Weight'])
+                              names=['Child', 'Parent', 'Weight'])
         
         # Verify vertices and arcs are properly loaded
         print("Vertices:")
