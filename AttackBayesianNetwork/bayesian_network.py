@@ -2,6 +2,7 @@
 from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
 from pgmpy.inference import VariableElimination
+from pgmpy.inference import BeliefPropagation
 from attack_graph import AttackGraph
 from probability_calculator import ProbabilityCalculator
 
@@ -54,9 +55,10 @@ class SecurityBayesianNetwork:
 
         return self.probability_calculator.calculate_cpd(node, node_info, valid_parents)
 
-    def perform_inference(self, target_nodes=None):
+    def perform_inference(self, target_nodes=None, evidence=None):
         """Perform probabilistic inference on the network"""
         inference = VariableElimination(self.bn)
+        #inference = BeliefPropagation(self.bn)
         
         if target_nodes is None:
             target_nodes = list(self.bn.nodes())
@@ -66,7 +68,7 @@ class SecurityBayesianNetwork:
         results = {}
         for node in target_nodes:
             try:
-                query_result = inference.query(variables=[node])
+                query_result = inference.query(variables=[node], evidence=evidence if evidence else {})
                 node_info = self.attack_graph.get_node_info(node)
                 results[node] = {
                     'probabilities': query_result,

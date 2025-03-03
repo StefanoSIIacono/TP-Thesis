@@ -59,7 +59,8 @@ def main():
     
     # Target specific node (e.g., root access)
     target_node = 1  # execCode(workStation,root)
-    target_results = bn_system.perform_inference(target_node)
+    evidence = {18:1, 17:1, 16:1}
+    target_results = bn_system.perform_inference(target_node, evidence)
     print(f"\nProbability analysis for target node {target_node}:")
     print(target_results[target_node]['probabilities'])
 
